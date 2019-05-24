@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: cloud-sql
+spec:
+  hosts:
+  - cloud-sql.tcp.svc
+  addresses:
+  - ~/32
+  ports:
+  - number: ~
+    name: tcp
+    protocol: TCP
+  location: MESH_EXTERNAL
+  resolution: STATIC
+  endpoints:
+  - address: ~
+

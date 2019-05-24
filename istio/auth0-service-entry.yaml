@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
-  name: astro-auth
+  name: auth0
 spec:
   hosts:
   - astronomerio.auth0.com

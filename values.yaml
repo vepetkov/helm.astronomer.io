@@ -28,6 +28,7 @@ global:
   # Airflow chart is disabled is should be deployed via the platform using the API/CLI/UI.
   airflowEnabled: false
 
+  externalDnsEnabled: true
 
 #################################
 ## Default tagged groups enabled

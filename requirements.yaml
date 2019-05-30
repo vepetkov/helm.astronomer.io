@@ -8,6 +8,10 @@ dependencies:
     condition: global.nginxEnabled
     tags:
       - platform
+  - name: external-dns
+    condition: global.externalDnsEnabled
+    tags:
+      - platform
 
   # Monitoring stack
   - name: grafana

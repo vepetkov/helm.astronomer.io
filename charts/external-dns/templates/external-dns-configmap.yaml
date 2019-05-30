@@ -1,0 +1,18 @@
+################################
+## External-DNS ConfigMap
+#################################
+{{- if and (eq .Values.provider "designate") .Values.designate.customCA.enabled }}
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ template "external-dns.fullname" . }}
+  labels:
+    tier: {{ template "external-dns.name" . }}
+    component: {{ template "external-dns.name" . }}
+    chart: {{ template "external-dns.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  {{ .Values.designate.customCA.filename }}: |
+{{ .Values.designate.customCA.content | indent 4 }}
+{{- end }}

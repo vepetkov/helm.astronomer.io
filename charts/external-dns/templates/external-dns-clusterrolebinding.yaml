@@ -1,0 +1,23 @@
+################################
+## External-DNS ClusterRoleBinding
+#################################
+{{- if .Values.global.rbacEnabled }}
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ template "external-dns.fullname" . }}
+  labels:
+    tier: {{ template "external-dns.name" . }}
+    component: {{ template "external-dns.name" . }}
+    chart: {{ template "external-dns.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ template "external-dns.fullname" . }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ template "external-dns.fullname" . }}
+    namespace: {{ .Release.Namespace }}
+{{- end -}}

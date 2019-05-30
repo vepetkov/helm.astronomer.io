@@ -1,0 +1,42 @@
+################################
+## External-DNS ClusterRole
+#################################
+{{- if .Values.global.rbacEnabled }}
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ template "external-dns.fullname" . }}
+  labels:
+    tier: {{ template "external-dns.name" . }}
+    component: {{ template "external-dns.name" . }}
+    chart: {{ template "external-dns.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - services
+      - pods
+      - nodes
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - extensions
+    resources:
+      - ingresses
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - networking.istio.io
+    resources:
+      - gateways
+    verbs:
+      - get
+      - list
+      - watch
+{{- end -}}
